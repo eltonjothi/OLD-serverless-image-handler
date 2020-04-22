@@ -133,7 +133,7 @@ class ImageHandler {
                 <rect x="0" y="0" width="300" height="100" fill="#000" />
                 <text x="20" y="76" font-size="44" fill="#fff">EdgeProp</text>
               </svg>`)
-                const params = [{ ...options, input: watermark }];
+                const params = [{ ...options, input: './watermark.svg' }];
                 image.composite(params);
             } else {
                 image[key](value);
