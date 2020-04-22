@@ -127,49 +127,8 @@ class ImageHandler {
                     let imageBuffer = await image.toBuffer();
                     imageMetadata = await sharp(imageBuffer).resize({ edits: { resize: edits.resize }}).metadata();
                 }
-
-                const { bucket, key, wRatio, hRatio, alpha } = value;
+                const { bucket, key, wRatio, hRatio, alpha, options } = value;
                 const overlay = await this.getOverlayImage(bucket, key, wRatio, hRatio, alpha, imageMetadata);
-                const overlayMetadata = await sharp(overlay).metadata();
-
-                let { options } = value;
-                if (options) {
-                    if (options.left) {
-                        let left = options.left;
-                        if (left.endsWith('p')) {
-                            left = parseInt(left.replace('p', ''));
-                            if (left < 0) {
-                                left = imageMetadata.width + (imageMetadata.width * left / 100) - overlayMetadata.width;
-                            } else {
-                                left = imageMetadata.width * left / 100;
-                            }
-                        } else {
-                            left = parseInt(left);
-                            if (left < 0) {
-                                left = imageMetadata.width + left - overlayMetadata.width;
-                            }
-                        }
-                        options.left = parseInt(left);
-                    }
-                    if (options.top) {
-                        let top = options.top;
-                        if (top.endsWith('p')) {
-                            top = parseInt(top.replace('p', ''));
-                            if (top < 0) {
-                                top = imageMetadata.height + (imageMetadata.height * top / 100) - overlayMetadata.height;
-                            } else {
-                                top = imageMetadata.height * top / 100;
-                            }
-                        } else {
-                            top = parseInt(top);
-                            if (top < 0) {
-                                top = imageMetadata.height + top - overlayMetadata.height;
-                            }
-                        }
-                        options.top = parseInt(top);
-                    }
-                }
-
                 const params = [{ ...options, input: overlay }];
                 image.composite(params);
             }
