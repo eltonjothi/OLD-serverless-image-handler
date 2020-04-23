@@ -57,3 +57,28 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+*
+const Img = JSON.stringify({
+  "bucket": "eltu",
+  "key": "test.jpg",
+  "edits": {
+    "resize": {
+      "width": 1400,
+      "height": 850,
+      "fit": "cover"
+    },
+  "TEPWatermark": {
+    "bucket": "eltu",
+    "key": "icon-m.png",
+    "options": {
+        "gravity": "northwest"
+      }
+    }
+  }
+});
+const imgurl = 'https://d3etqiqjdcw1wg.cloudfront.net/' + btoa(Img);
+
+document.write('<a href="' + imgurl + '" target="_blank" >CLICK HERE</a><br/>');
+document.write(imgurl);
