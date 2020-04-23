@@ -122,14 +122,8 @@ class ImageHandler {
                     });
                 }
             } else if (key === 'TEPWatermark') {
-                let imageMetadata = metadata;
-                if (edits.resize) {
-                    let imageBuffer = await image.toBuffer();
-                    imageMetadata = await sharp(imageBuffer).resize({ edits: { resize: edits.resize }}).metadata();
-                }
-                const { bucket, key, wRatio, hRatio, alpha, options } = value;
+                const { options } = value;
                 const { name = ''} = options;
-                const overlay = await this.getOverlayImage(bucket, key, wRatio, hRatio, alpha, imageMetadata);
                 const watermark = new Buffer(`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 340 140" width="340" height="140"><defs><path d="M18.11 0L340 0L340 30L18.11 30L18.11 0Z" id="aL4kaXwLB"></path><linearGradient id="gradientb1nznF2gk" gradientUnits="userSpaceOnUse" x1="340" y1="15" x2="200.91" y2="15"><stop style="stop-color: #ffffff;stop-opacity: 0.22" offset="0%"></stop><stop style="stop-color: #dddddd;stop-opacity: 1" offset="100%"></stop></linearGradient><path d="M26.94 3.92L113.82 3.92L113.82 26.08L26.94 26.08L26.94 3.92Z" id="a1JZ8Le9rJ"></path><clipPath id="clipc3jA6tEaBa"><use xlink:href="#a1JZ8Le9rJ" opacity="1"></use></clipPath><text id="bnd4bwrWA" x="580.12" y="436.24" font-size="14" font-family="Open Sans" font-weight="normal" font-style="normal" letter-spacing="0" alignment-baseline="before-edge" transform="matrix(1 0 0 1 -272.5 -430.7389439469181)" style="line-height:100%" xml:space="preserve" dominant-baseline="text-before-edge"><tspan x="580.12" dy="0em" alignment-baseline="before-edge" dominant-baseline="text-before-edge" text-anchor="end">${name}</tspan></text><style id="opensansnormalnormal">
                 @font-face {
                 font-family: "Open Sans";
