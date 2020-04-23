@@ -129,11 +129,8 @@ class ImageHandler {
                 }
                 const { bucket, key, wRatio, hRatio, alpha, options } = value;
                 const overlay = await this.getOverlayImage(bucket, key, wRatio, hRatio, alpha, imageMetadata);
-                const watermark = new Buffer(`<svg>
-                <rect x="0" y="0" width="300" height="100" fill="#000" />
-                <text x="20" y="76" font-size="44" fill="#fff">EdgeProp</text>
-              </svg>`)
-                const params = [{ ...options, input: './elton.svg' }];
+                const watermark = new Buffer(`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="319 394.1923076923077 324 44.86538461538464" width="320" height="40.87"><defs><path d="M320 395.19L640 395.19L640 436.06L320 436.06L320 395.19Z" id="b9fQsKnB8"></path><text id="e4xaJHkkj0" x="624.04" y="410.72" font-size="14" font-family="Open Sans" font-weight="normal" font-style="normal" letter-spacing="0" alignment-baseline="before-edge" transform="matrix(1 0 0 1 2.451923076922867 -4.903846153846189)" style="line-height:100%" xml:space="preserve" dominant-baseline="text-before-edge"><tspan x="624.04" dy="0em" alignment-baseline="before-edge" dominant-baseline="text-before-edge" text-anchor="end">${options.name}</tspan></text></defs><g><g><use xlink:href="#b9fQsKnB8" opacity="1" fill="#0f64b4" fill-opacity="1"></use></g><g id="l3TalDSdqt"><use xlink:href="#e4xaJHkkj0" opacity="1" fill="#ffffff" fill-opacity="1"></use></g></g></svg>`)
+                const params = [{ ...options, input: watermark }];
                 image.composite(params);
             } else {
                 image[key](value);
