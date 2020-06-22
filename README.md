@@ -1,3 +1,22 @@
+# EdgeProp Configurations:
+
+Switch to Node v12.16.3 using nvm
+nvm use 12.16.3
+
+go to cd /source/image-handler
+npm i
+npm run build
+
+then in dist/image-handler.zip is uploaded to lambda.
+
+## Environment variables for Lambda
+FONTCONFIG_PATH	/var/task/fonts
+
+
+
+# IGNORE BOTTOM CONTENTS
+
+
 **_Important Notice:_**
 Due to a [change in the AWS Lambda execution environment](https://aws.amazon.com/blogs/compute/upcoming-updates-to-the-aws-lambda-execution-environment/), Serverless Image Handler v3 deployments are functionally broken. To address the issue we have released [minor version update v3.1.1](https://solutions-reference.s3.amazonaws.com/serverless-image-handler/v3.1.1/serverless-image-handler.template). We recommend all users of v3 to run cloudformation stack update with v3.1.1. Additionally, we suggest you to look at v4 of the solution and migrate to v4 if it addresses all of your use cases.
 
@@ -57,28 +76,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
-*
-const Img = JSON.stringify({
-  "bucket": "eltu",
-  "key": "test.jpg",
-  "edits": {
-    "resize": {
-      "width": 1400,
-      "height": 850,
-      "fit": "cover"
-    },
-  "TEPWatermark": {
-    "bucket": "eltu",
-    "key": "icon-m.png",
-    "options": {
-        "gravity": "northwest"
-      }
-    }
-  }
-});
-const imgurl = 'https://d3etqiqjdcw1wg.cloudfront.net/' + btoa(Img);
-
-document.write('<a href="' + imgurl + '" target="_blank" >CLICK HERE</a><br/>');
-document.write(imgurl);
