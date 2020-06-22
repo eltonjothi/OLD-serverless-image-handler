@@ -12,6 +12,33 @@ then in dist/image-handler.zip is uploaded to lambda.
 ## Environment variables for Lambda
 FONTCONFIG_PATH	/var/task/fonts
 
+```
+const Img = JSON.stringify({
+   "bucket":"eltu",
+   "key":"listing.jpg",
+   "edits":{
+      "resize":{
+         // "width":340,
+         "height":725,
+         "fit":"inside"
+      },
+      "TEPWatermark":{
+         "bucket":"eltu",
+         "key":"listing.jpg",
+         "options":{
+           "style":"cute",
+           "name":"Kevin Teoansah",
+           "gravity":"center"
+            // "gravity":"southeast"
+         }
+      }
+   }
+}); 
+const imgurl = 'https://d39jcnu40se0sv.cloudfront.net/' + btoa(Img);
+
+document.write('<a href="' + imgurl + '" target="_blank" >CLICK HERE</a><br/>');
+document.write(imgurl);
+```
 
 
 # IGNORE BOTTOM CONTENTS
